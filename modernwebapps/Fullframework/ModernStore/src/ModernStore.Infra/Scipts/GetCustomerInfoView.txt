@@ -1,0 +1,15 @@
+﻿CREATE VIEW [GetCustomerInfoView]
+AS
+SELECT 
+	C.FirstName + '' + C.LastName	AS [NAME],
+	C.Cpf							AS [DOCUMENT],
+	C.Email							AS [EMAIL],
+	U.Username						AS [USERNAME],
+	U.Password						AS [PASSWORD],
+	U.Active						as [ACTIVE]
+FROM
+	[DBO].[CUSTOMER]	C
+INNER JOIN
+	[dbo].[User]		U
+ON
+	C.User_Id = U.Id

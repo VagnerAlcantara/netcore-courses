@@ -1,0 +1,92 @@
+@page
+@model FilmesCRUDRazor.Pages.Filmes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row"> 
+        <div class="col-md-12">
+                <h2>Filme Top +</h2>
+                <p>
+                    <a class="btn btn-primary" asp-page="Create">
+                        <span class="glyphicon glyphicon-plus"></span> Adicionar Filme</a>
+                </p>
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="text-left">Gêneros:</label>
+                            <select class="form-control" asp-for="FilmePorGenero" asp-items="Model.Generos">
+                                <option value="">Todos - Gênero</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="text-left">Título do Filme</label>
+                            <input class="form-control" type="text" name="BuscaPorGeneroNome">
+                            <br>
+                            <input class="bn btn-primary" type="submit" value="Filtrar">
+                        </div>
+                    </div>
+                </form>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.Filme[0].Titulo)
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.Filme[0].DataLancamento)
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.Filme[0].Genero)
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.Filme[0].Preco)
+                            </th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                @foreach (var item in Model.Filme) {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Titulo)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.DataLancamento)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Genero)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Preco)
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.FilmeId"><span class="glyphicon glyphicon-pencil"></span></a> 
+                                <a class="btn btn-info" asp-page="./Details" asp-route-id="@item.FilmeId"><span class="glyphicon glyphicon-info-sign"></span></a> 
+                                <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.FilmeId"><span class="glyphicon glyphicon-trash"></span></a>
+                            </td>
+                        </tr>
+                }
+                    </tbody>
+                </table>
+                <div class="clearfix">
+                    <ul class="pagination pull-right">
+                        <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li class="#"><a href="#">2</a></li>
+                        <li class="#"><a href="#">3</a></li>
+                        <li class="#"><a href="#">4</a></li>
+                        <li class="#"><a href="#">5</a></li>
+                        <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    </ul>
+                </div>
+                </div>
+        </div>
+
+    </div>
+</div>

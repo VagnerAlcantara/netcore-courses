@@ -1,0 +1,14 @@
+﻿
+
+- Uma API não permanece autenticada, a autenticação é feita a cada request através de token;
+- OAuth (Open authentication) 
+- O App recebe um Token e a cada request esse token é enviado para API para validação;
+- Autenticação
+	- Diz quem você é;
+- Autorização
+	- Diz o que você pode fazer;
+
+- Na geração do Token pelo ASP.Net é o utilizado JWT (fala-se jot) (significa: Json Web Token);
+- Token é formado por usuário + senha + chave privada (fica armazenada no IIS) + informações do JWT;
+- Roles: Simples strings (ex: "Admin", "User");
+- Police: Pode ser um código, é mais rica e dados;
