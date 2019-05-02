@@ -19,12 +19,12 @@ namespace FN.Store.Data.EF.Repositories
             _db = _context.Set<TEntity>();
         }
 
-        public async Task<TEntity> Get(object id)
+        public async Task<TEntity> GetAsync(object id)
         {
             return await _db.FindAsync(id);
         }
 
-        public async Task<IEnumerable<TEntity>> Get()
+        public async Task<IEnumerable<TEntity>> GetAsync()
         {
             return await _db.ToListAsync();
         }

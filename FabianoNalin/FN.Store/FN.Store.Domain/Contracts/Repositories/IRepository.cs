@@ -10,7 +10,7 @@ namespace FN.Store.Domain.Contracts.Repositories
         void Update(TEntity entity);
         void Delete(TEntity entity);
 
-        Task<IEnumerable<TEntity>> Get();
-        Task<TEntity> Get(object id);
+        Task<IEnumerable<TEntity>> GetAsync();
+        Task<TEntity> GetAsync(object id);
     }
 }

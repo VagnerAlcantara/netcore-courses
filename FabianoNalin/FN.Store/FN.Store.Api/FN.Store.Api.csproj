@@ -8,10 +8,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\FN.Store.DI\FN.Store.DI.csproj" />
+    <ProjectReference Include="..\FN.Store.Domain\FN.Store.Domain.csproj" />
   </ItemGroup>
 
 </Project>
