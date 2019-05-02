@@ -30,8 +30,8 @@ namespace FN.Store.Data.EF
                 new Produto() { Id = 2, Nome = "Pasta de dente", Categoria = "Higiene", Preco = 9.9M },
                 new Produto() { Id = 3, Nome = "Danone", Categoria = "Alimento", Preco = 10.59M },
                 new Produto() { Id = 4, Nome = "Caneta Bic", Categoria = "Papelaria", Preco = 1.9M },
-                new Produto() { Id = 4, Nome = "Caderno 10 matérias", Categoria = "Papelaria", Preco = 55.4M },
-                new Produto() { Id = 4, Nome = "Fralda Pampers", Categoria = "Higiene", Preco = 50.9M }
+                new Produto() { Id = 5, Nome = "Caderno 10 matérias", Categoria = "Papelaria", Preco = 55.4M },
+                new Produto() { Id = 6, Nome = "Fralda Pampers", Categoria = "Higiene", Preco = 50.9M }
                 );
         }
     }

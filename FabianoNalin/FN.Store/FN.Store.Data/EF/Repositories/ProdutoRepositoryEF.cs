@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FN.Store.Data.EF.Repositories
 {
-    public abstract class ProdutoRepositoryEF : RepositoryEF<Produto>, IProdutoRepository
+    public class ProdutoRepositoryEF : RepositoryEF<Produto>, IProdutoRepository
     {
         public ProdutoRepositoryEF(StoreDataContext context) : base(context)
         {
