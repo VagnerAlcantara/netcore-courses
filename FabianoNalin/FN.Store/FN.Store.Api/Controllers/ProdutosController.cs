@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FN.Store.Domain.Contracts.Repositories;
-using Microsoft.AspNetCore.Http;
+﻿using FN.Store.Domain.Contracts.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace FN.Store.Api.Controllers
 {

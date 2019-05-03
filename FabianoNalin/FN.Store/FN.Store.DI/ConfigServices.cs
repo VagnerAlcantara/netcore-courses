@@ -19,6 +19,7 @@ namespace FN.Store.DI
             services.AddScoped<StoreDataContext>();
             //Instancia por chamada
             services.AddTransient<IProdutoRepository, ProdutoRepositoryEF>();
+            services.AddTransient<ICategoriaRepository, CategoriaRepositoryEF>();
         }
     }
 }
