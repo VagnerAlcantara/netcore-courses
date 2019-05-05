@@ -14,7 +14,12 @@ namespace FN.Store.Data.EF.Repositories
 
         }
 
-        public async Task<IEnumerable<Produto>> GeyByNome(string nome)
+        public async Task<IEnumerable<Produto>> GetAllWithCategoriaaAsync()
+        {
+            return await _db.Include(x => x.Categoria).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Produto>> GeyByNomeAsync(string nome)
         {
             return await _db.Where(x => x.Nome.Contains(nome)).ToListAsync();
         }

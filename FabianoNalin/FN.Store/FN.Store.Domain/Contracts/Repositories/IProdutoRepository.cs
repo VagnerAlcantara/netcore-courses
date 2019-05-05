@@ -8,7 +8,8 @@ namespace FN.Store.Domain.Contracts.Repositories
 {
     public interface IProdutoRepository : IRepository<Produto>
     {
-        Task<IEnumerable<Produto>> GeyByNome(string nome);
+        Task<IEnumerable<Produto>> GeyByNomeAsync(string nome);
+        Task<IEnumerable<Produto>> GetAllWithCategoriaaAsync();
 
     }
 }

@@ -1,6 +1,8 @@
 ﻿using FN.Store.Domain.Contracts.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System.Linq;
+using FN.Store.Api.Models;
 
 namespace FN.Store.Api.Controllers
 {
@@ -16,7 +18,7 @@ namespace FN.Store.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var data = await _produtoRepository.GetAsync();
+            var data = (await _produtoRepository.GetAllWithCategoriaaAsync()).Select(x => x.ToProdutoGet());
 
             return Ok(data);
         }
