@@ -7,5 +7,12 @@
         public decimal Preco { get; set; }
         public int CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
+
+        public void Update(string nome, decimal preco, int categoriaId)
+        {
+            Nome = nome;
+            Preco = preco;
+            CategoriaId = categoriaId;
+        }
     }
 }

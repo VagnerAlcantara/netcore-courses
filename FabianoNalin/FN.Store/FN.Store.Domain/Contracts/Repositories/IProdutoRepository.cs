@@ -10,6 +10,7 @@ namespace FN.Store.Domain.Contracts.Repositories
     {
         Task<IEnumerable<Produto>> GeyByNomeAsync(string nome);
         Task<IEnumerable<Produto>> GetAllWithCategoriaaAsync();
+        Task<Produto> GetByIdWithCategoriaaAsync(int id);
 
     }
 }

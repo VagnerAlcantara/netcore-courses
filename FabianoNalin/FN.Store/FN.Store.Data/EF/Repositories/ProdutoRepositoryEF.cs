@@ -19,6 +19,11 @@ namespace FN.Store.Data.EF.Repositories
             return await _db.Include(x => x.Categoria).ToListAsync();
         }
 
+        public async Task<Produto> GetByIdWithCategoriaaAsync(int id)
+        {
+            return await _db.Include(x => x.Categoria).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<IEnumerable<Produto>> GeyByNomeAsync(string nome)
         {
             return await _db.Where(x => x.Nome.Contains(nome)).ToListAsync();
