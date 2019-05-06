@@ -9,10 +9,10 @@ namespace FN.Store.Api
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-            .AddJsonOptions(options =>
+            services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
             services.AddDependencies();
         }

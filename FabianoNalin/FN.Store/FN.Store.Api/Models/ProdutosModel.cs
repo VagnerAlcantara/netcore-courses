@@ -13,11 +13,11 @@ namespace FN.Store.Api.Models
     }
     public class ProdutoAddEdit
     {
-        [Required(ErrorMessage ="Campo obrigatório")]
-        [StringLength(100, ErrorMessage ="Limite de carácteres excedido")]
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [StringLength(100, ErrorMessage = "Limite de carácteres excedido")]
         public string Nome { get; set; }
         [Required]
-        [Range(0.1, double.MaxValue, ErrorMessage ="Valor inválido")]
+        [Range(0.1, double.MaxValue, ErrorMessage = "Valor inválido")]
         public decimal Preco { get; set; }
         [Required]
         public int CategoriaId { get; set; }

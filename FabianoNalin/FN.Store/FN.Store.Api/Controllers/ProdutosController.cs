@@ -24,6 +24,7 @@ namespace FN.Store.Api.Controllers
 
             return Ok(data);
         }
+
         [HttpGet("{id}", Name = "GetProdutoById")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -33,6 +34,7 @@ namespace FN.Store.Api.Controllers
 
             return Ok(data?.ToProdutoGet());
         }
+
         [HttpPost]
         public async Task<IActionResult> Add([FromBody]ProdutoAddEdit model)
         {
@@ -77,6 +79,7 @@ namespace FN.Store.Api.Controllers
 
             return Ok();
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

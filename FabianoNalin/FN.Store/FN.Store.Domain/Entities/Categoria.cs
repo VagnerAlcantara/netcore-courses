@@ -8,5 +8,11 @@ namespace FN.Store.Domain.Entities
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public ICollection<Produto> Produtos { get; set; }
+
+        public void Update(string nome, string descricao)
+        {
+            Nome = nome;
+            Descricao = descricao;
+        }
     }
 }
