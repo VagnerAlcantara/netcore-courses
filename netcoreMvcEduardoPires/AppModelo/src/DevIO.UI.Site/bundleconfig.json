@@ -1,16 +1,17 @@
-{
+[
   {
+    "outputFileName": "wwwroot/css/site_bundle.min.css",
     "inputFiles": [
       "wwwroot/lib/bootstrap/css/bootstrap.css",
       "wwwroot/css/site.css"
-    ],
-    "outputFileName": "wwwroot/css/site_bundle.min.css"
+    ]
   },
   {
+
+    "outputFileName": "wwwroot/css/site_bundle.min.js",
     "inputFiles": [
       "wwwroot/lib/jquery/jquery.js",
       "wwwroot/js/site.js"
-    ],
-    "outputFileName": "wwwroot/css/site_bundle.min.js"
+    ]
   }
-}
+]
