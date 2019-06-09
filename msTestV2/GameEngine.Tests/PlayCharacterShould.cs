@@ -22,7 +22,8 @@ namespace GameEngine.Tests
         }
 
         [TestMethod]
-        [TestCategory("Player Defaults")]
+        //[TestCategory("Player Defaults")] substituido por extension abaixo
+        [PlayerDefaults]
         [Ignore("Motivo pelo qual esta ignorado")]
         public void BeInexperiencedWhenNew()
         {
@@ -30,14 +31,14 @@ namespace GameEngine.Tests
         }
 
         [TestMethod]
-        [TestCategory("Player Defaults")]
+        [PlayerDefaults]
         public void NotHaveNickNameByDefault()
         {
             Assert.IsNull(sut.Nickname);
         }
 
         [TestMethod]
-        [TestCategory("Player Defaults")]
+        [PlayerDefaults]
         public void StartWithDefaultHealth()
         {
             Assert.AreEqual(100, sut.Health);
@@ -57,7 +58,7 @@ namespace GameEngine.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(GetDamages), DynamicDataSourceType.Method)]
-        [TestCategory("Player Health")]
+        [PlayerHealth]
         public void TakeDamageMethod(int damage, int expectedHealth)
         {
             sut.TakeDamage(damage);
@@ -82,7 +83,7 @@ namespace GameEngine.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(Damages))]
-        [TestCategory("Player Health")]
+        [PlayerHealth]
         public void TakeDamageList(int damage, int expectedHealth)
         {
             sut.TakeDamage(damage);
