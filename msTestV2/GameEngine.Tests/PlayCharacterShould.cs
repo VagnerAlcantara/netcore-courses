@@ -93,7 +93,7 @@ namespace GameEngine.Tests
 
         [DataTestMethod]
         [DynamicData(nameof(DamageData.GetDamages), typeof(DamageData), DynamicDataSourceType.Method)]
-        [TestCategory("Player Health")]
+        [PlayerHealth]
         public void TakeDamageClass(int damage, int expectedHealth)
         {
             sut.TakeDamage(damage);
@@ -102,10 +102,19 @@ namespace GameEngine.Tests
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(ExternalHealthDamageTestData.TestData),
-                     typeof(ExternalHealthDamageTestData))]
+        [DynamicData(nameof(ExternalHealthDamageTestData.TestData), typeof(ExternalHealthDamageTestData))]
         [TestCategory("Player Health")]
         public void TakeDamageExternalSource(int damage, int expectedHealth)
+        {
+            sut.TakeDamage(damage);
+
+            Assert.AreEqual(sut.Health, expectedHealth);
+        }
+
+        [DataTestMethod]
+        [CsvDataSource("Damages.csv")]
+        [PlayerHealth]
+        public void TakeDamageExternalSourceExtension(int damage, int expectedHealth)
         {
             sut.TakeDamage(damage);
 
