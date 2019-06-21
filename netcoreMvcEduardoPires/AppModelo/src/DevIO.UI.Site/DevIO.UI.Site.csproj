@@ -9,6 +9,7 @@
     <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
@@ -17,7 +18,6 @@
     <Folder Include="Areas\Produtos\Models\" />
     <Folder Include="Areas\Vendas\Data\" />
     <Folder Include="Areas\Vendas\Models\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
