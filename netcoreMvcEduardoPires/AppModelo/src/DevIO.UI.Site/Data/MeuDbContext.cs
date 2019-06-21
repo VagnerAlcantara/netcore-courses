@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DevIO.UI.Site.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,7 @@ namespace DevIO.UI.Site.Data
         {
 
         }
+
+        public DbSet<Aluno> Alunos { get; set; }
     }
 }
