@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreIdentity.Areas.Identity.Data;
+using AspNetCoreIdentity.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -41,6 +42,13 @@ namespace AspNetCoreIdentity
                 .AddRoles<IdentityRole>()
                 .AddDefaultUI(Microsoft.AspNetCore.Identity.UI.UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<AspNetCoreIdentityContext>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("PodeExcluir", policy => policy.RequireClaim("PodeExcluir"));
+                options.AddPolicy("PodeLer", policy => policy.Requirements.Add(new PermissaoNecessaria("PodeLer")));
+                options.AddPolicy("PodeEscrever", policy => policy.Requirements.Add(new PermissaoNecessaria("PodeEscrever")));
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
