@@ -19,7 +19,12 @@ namespace AspNetCoreIdentity.Extensions
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissaoNecessaria requirement)
         {
-            throw new NotImplementedException();
+            if (context.User.HasClaim(x => x.Type == "Permissao" && x.Value.Contains(requirement.Permissao)))
+            {
+                context.Succeed(requirement);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }
