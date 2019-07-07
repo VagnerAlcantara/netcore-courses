@@ -48,10 +48,35 @@ namespace AspNetCoreIdentity.Controllers
             return View("Secret");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        //length(3,3): deve ter no mínimo 3 e no máximo 3 caracteres
+        [Route("erro/{id:length(3,3)}")]
+        public IActionResult Error(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ErrorViewModel errorViewModel = new ErrorViewModel();
+
+            if (id == 500)
+            {
+                errorViewModel.Mensagem = "Ocorreu um erro. Tente novamente mais tarde ou contate nosso suporte.";
+                errorViewModel.Titulo = "Ocorreu um erro!";
+                errorViewModel.ErroCode = id;
+            }
+            else if (id == 404)
+            {
+                errorViewModel.Mensagem = "A página que está procurando não existe!<br/> Em caso de dúvidas entre em contato com nosso suporte";
+                errorViewModel.Titulo = "Ops! Página não encontrada";
+                errorViewModel.ErroCode = id;
+            }
+            else if (id == 403)
+            {
+                errorViewModel.Mensagem = "Você não tem permissão para fazer isto";
+                errorViewModel.Titulo = "Acesso negado";
+                errorViewModel.ErroCode = id;
+            }
+            else
+            {
+                return StatusCode(404);
+            }
+            return View("Error", errorViewModel);
         }
     }
 }
