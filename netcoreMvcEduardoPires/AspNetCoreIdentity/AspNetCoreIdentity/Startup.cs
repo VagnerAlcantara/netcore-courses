@@ -1,4 +1,6 @@
 ﻿using AspNetCoreIdentity.Config;
+using KissLog.Apis.v1.Listeners;
+using KissLog.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -54,6 +56,15 @@ namespace AspNetCoreIdentity
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            // make sure it is added after app.UseStaticFiles() and app.UseSession(), and before app.UseMvc()
+            app.UseKissLogMiddleware(options =>
+            {
+                options.Listeners.Add(new KissLogApiListener(new KissLog.Apis.v1.Auth.Application(
+                    Configuration["KissLog.OrganizationId"],
+                    Configuration["KissLog.ApplicationId"])
+                ));
+            });
 
             app.UseMvc(routes =>
             {
