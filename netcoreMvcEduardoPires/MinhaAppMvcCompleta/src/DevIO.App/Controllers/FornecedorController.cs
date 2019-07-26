@@ -66,7 +66,7 @@ namespace DevIO.App.Controllers
                 return NotFound();
             }
 
-            var fornecedorViewModel = ObterFornecedorProdutosEndereco(id.Value);
+            var fornecedorViewModel = await ObterFornecedorProdutosEndereco(id.Value);
 
             if (fornecedorViewModel == null)
             {
