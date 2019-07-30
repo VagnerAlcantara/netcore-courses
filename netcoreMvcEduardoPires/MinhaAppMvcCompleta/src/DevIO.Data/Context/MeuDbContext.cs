@@ -26,6 +26,8 @@ namespace DevIO.Data.Context
             {
                 property.Relational().ColumnType = "varchar(100)";
             }
+
+            //Fluent API
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MeuDbContext).Assembly);
 
             //Impede que o EF faz exclusão em cascata de forma automática
