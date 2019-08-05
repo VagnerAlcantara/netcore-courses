@@ -24,7 +24,7 @@ namespace DevIO.Business.Services
         public async Task Adicionar(Fornecedor fornecedor)
         {
             //validar o estado da entidade
-            if (!ExecutarValidacao(new FornecedorValidation(), fornecedor) &&
+            if (!ExecutarValidacao(new FornecedorValidation(), fornecedor) ||
                 !ExecutarValidacao(new EnderecoValidation(), fornecedor.Endereco)) return;
 
             if (_fornecedorRepository.Buscar(x => x.Documento == fornecedor.Documento).Result.Any())

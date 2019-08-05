@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace DevIO.App.Controllers
 {
-    //TODO: 24:30
     public class ProdutoController : BaseController
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -19,7 +18,12 @@ namespace DevIO.App.Controllers
         private readonly IProdutoService _produtoService;
         private readonly IMapper _mapper;
 
-        public ProdutoController(IProdutoRepository produtoRepository, IFornecedorRepository fornecedorRepository, IMapper mapper, IProdutoService produtoService)
+        public ProdutoController(
+            IProdutoRepository produtoRepository,
+            IFornecedorRepository fornecedorRepository,
+            IMapper mapper,
+            IProdutoService produtoService,
+            INotificador notificador) : base(notificador)
         {
             _produtoRepository = produtoRepository;
             _mapper = mapper;
@@ -78,6 +82,8 @@ namespace DevIO.App.Controllers
 
             await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
 
+            if (!OperacaoValida()) return View(produtoViewModel);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -130,6 +136,8 @@ namespace DevIO.App.Controllers
 
             await _produtoService.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));
 
+            if (!OperacaoValida()) return View(produtoViewModel);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -162,6 +170,10 @@ namespace DevIO.App.Controllers
                 return NotFound();
             }
             await _produtoService.Remover(id);
+
+            if (!OperacaoValida()) return View(produtoViewModel);
+
+            TempData["Sucesso"] = "Produto excluído com sucesso";
 
             return RedirectToAction(nameof(Index));
         }
