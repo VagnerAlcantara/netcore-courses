@@ -22,6 +22,10 @@ namespace DevIO.Data.Mappings
               .IsRequired()
               .HasColumnType("Varchar(100)");
 
+            builder.Property(x => x.Valor)
+                .IsRequired()
+                .HasColumnType("decimal(5,2)");
+
             builder.ToTable("Produtos");
         }
     }
