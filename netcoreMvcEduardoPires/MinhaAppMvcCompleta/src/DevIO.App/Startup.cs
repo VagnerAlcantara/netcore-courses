@@ -33,6 +33,11 @@ namespace DevIO.App
                 builder.AddUserSecrets<Startup>();
             }
 
+            if (hostEnvironment.IsProduction())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
             Configuration = builder.Build();
         }
 
