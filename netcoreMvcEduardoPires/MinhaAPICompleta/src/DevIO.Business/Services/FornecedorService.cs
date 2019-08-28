@@ -21,42 +21,47 @@ namespace DevIO.Business.Services
             _enderecoRepository = enderecoRepository;
         }
 
-        public async Task Adicionar(Fornecedor fornecedor)
+        public async Task<bool> Adicionar(Fornecedor fornecedor)
         {
             //validar o estado da entidade
             if (!ExecutarValidacao(new FornecedorValidation(), fornecedor) ||
-                !ExecutarValidacao(new EnderecoValidation(), fornecedor.Endereco)) return;
+                !ExecutarValidacao(new EnderecoValidation(), fornecedor.Endereco)) return false;
 
             if (_fornecedorRepository.Buscar(x => x.Documento == fornecedor.Documento).Result.Any())
             {
                 Notificar("Já existe um fornecedor com o documento informado");
-                return;
+                return false;
             }
 
             await _fornecedorRepository.Adicionar(fornecedor);
+            return true;
         }
 
-        public async Task Atualizar(Fornecedor fornecedor)
+        public async Task<bool> Atualizar(Fornecedor fornecedor)
         {
-            if (!ExecutarValidacao(new FornecedorValidation(), fornecedor)) return;
+            if (!ExecutarValidacao(new FornecedorValidation(), fornecedor)) return false; 
 
             if (_fornecedorRepository.Buscar(x => x.Documento == fornecedor.Documento && x.Id != fornecedor.Id).Result.Any())
             {
                 Notificar("Já existe um fornecedor com o documento informado");
-                return;
+                return false;
             }
             await _fornecedorRepository.Atualizar(fornecedor);
+
+            return true;
         }
 
-        public async Task Remover(Guid id)
+        public async Task<bool> Remover(Guid id)
         {
             if (_fornecedorRepository.ObterFornecedorProdutosEndereco(id).Result.Produtos.Any())
             {
                 Notificar("O fornecedor possui produtos cadastrados");
-                return;
+                return false;
             }
 
             await _fornecedorRepository.Remover(id);
+
+            return true;
         }
 
         public async Task AtualizarEndereco(Endereco endereco)
