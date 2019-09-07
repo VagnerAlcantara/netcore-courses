@@ -1,9 +1,12 @@
 ﻿using DevIO.API.Data;
 using DevIO.API.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace DevIO.API.Configurations
 {
@@ -21,6 +24,34 @@ namespace DevIO.API.Configurations
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddErrorDescriber<IdentityMensagemPortugues>()
                 .AddDefaultTokenProviders();
+
+            //Json web token (JWT)
+            var appSectionSettings = configuration.GetSection("AppSettings");
+
+            services.Configure<AppSettings>(appSectionSettings);
+
+            var appSettings = appSectionSettings.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(y =>
+            {
+                y.RequireHttpsMetadata = true;//obriga toda requisição seja feita por https
+                y.SaveToken = true;//
+                y.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = appSettings.ValidoEm,
+                    ValidIssuer = appSettings.Emissor
+                };
+            });
 
             return services;
         }
