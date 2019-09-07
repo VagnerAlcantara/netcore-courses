@@ -2,6 +2,7 @@
 using AutoMapper;
 using DevIO.API.ViewModels;
 using DevIO.Business.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace DevIO.API.Controllers
 {
+    [Authorize]
     [Route("api/fornecedores")]
     public class FornecedorController : MainController
     {

@@ -27,6 +27,8 @@ namespace DevIO.API
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddIdentityConfiguration(Configuration);
+
             services.AddAutoMapper(typeof(Startup));
 
             services.WebApiConfig();
@@ -46,6 +48,10 @@ namespace DevIO.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //Sempre deve vir antes do config mvc
+            app.UseAuthentication();
+
             app.UseMvcConfiguration();
         }
     }
