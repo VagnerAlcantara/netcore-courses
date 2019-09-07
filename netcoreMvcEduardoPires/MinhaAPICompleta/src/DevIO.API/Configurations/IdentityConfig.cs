@@ -1,12 +1,9 @@
 ﻿using DevIO.API.Data;
+using DevIO.API.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DevIO.API.Configurations
 {
@@ -22,6 +19,7 @@ namespace DevIO.API.Configurations
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddErrorDescriber<IdentityMensagemPortugues>()
                 .AddDefaultTokenProviders();
 
             return services;
