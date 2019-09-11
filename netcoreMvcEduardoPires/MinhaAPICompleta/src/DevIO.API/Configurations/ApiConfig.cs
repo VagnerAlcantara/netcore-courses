@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 
 namespace DevIO.API.Configurations
 {
@@ -15,12 +16,27 @@ namespace DevIO.API.Configurations
                 opt.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddCors(options => {
+            services.AddCors(options =>
+            {
+                /* Configuração padrao idenpedente de ambiente
+                options.AddDefaultPolicy(buider => buider
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+                */
                 options.AddPolicy("Development", builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
+
+                options.AddPolicy("Production", builder => builder
+                .WithMethods("GET")
+                .WithOrigins("http://desenvolvedor.io")
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
+                //.WithHeaders(HeaderNames.ContentType, "x-custom-header")
+                .AllowAnyHeader());
             });
 
             return services;
@@ -28,8 +44,6 @@ namespace DevIO.API.Configurations
         public static IApplicationBuilder UseMvcConfiguration(this IApplicationBuilder app)
         {
             app.UseHttpsRedirection();
-
-            app.UseCors("Development");
             app.UseMvc();
             return app;
         }
