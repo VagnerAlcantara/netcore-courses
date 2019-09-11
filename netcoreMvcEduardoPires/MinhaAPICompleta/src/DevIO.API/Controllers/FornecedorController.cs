@@ -1,5 +1,6 @@
 ﻿using AppMvcBasica.Models;
 using AutoMapper;
+using DevIO.Api.Extensions;
 using DevIO.API.ViewModels;
 using DevIO.Business.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +20,13 @@ namespace DevIO.API.Controllers
         private readonly IMapper _mapper;
         private readonly IEnderecoRepository _enderecoRepository;
 
-        public FornecedorController(IFornecedorRepository fornecedorRepository, IMapper mapper, IFornecedorService fornecedorService, INotificador notificador, IEnderecoRepository enderecoRepository) : base(notificador)
+        public FornecedorController(
+            IFornecedorRepository fornecedorRepository,
+            IMapper mapper,
+            IFornecedorService fornecedorService,
+            INotificador notificador,
+            IEnderecoRepository enderecoRepository,
+            IUser user) : base(notificador, user)
         {
             _fornecedorRepository = fornecedorRepository;
             _mapper = mapper;
@@ -45,6 +52,7 @@ namespace DevIO.API.Controllers
             return fornecedor;
         }
 
+        [ClaimsAuthorize("Fornecedor", "Adicionar")]
         [HttpPost]
         public async Task<ActionResult<FornecedorViewModel>> Adicionar(FornecedorViewModel fornecedorViewModel)
         {
@@ -55,6 +63,7 @@ namespace DevIO.API.Controllers
             return CustomResponse(fornecedorViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Atualizar")]
         [HttpPut("{id:guid}")]
         public async Task<ActionResult<FornecedorViewModel>> Atualizar(Guid id, FornecedorViewModel fornecedorViewModel)
         {
@@ -71,6 +80,7 @@ namespace DevIO.API.Controllers
             return CustomResponse(fornecedorViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Excluir")]
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult<FornecedorViewModel>> Excluir(Guid id)
         {
@@ -91,6 +101,7 @@ namespace DevIO.API.Controllers
             return enderecoViewModel;
         }
 
+        [ClaimsAuthorize("Fornecedor", "Atualizar")]
         [HttpPut("atualizar-endereco/{id:guid}")]
         public async Task<IActionResult> AtualizarEndereco(Guid id, EnderecoViewModel enderecoViewModel)
         {
@@ -107,14 +118,14 @@ namespace DevIO.API.Controllers
             return CustomResponse(enderecoViewModel);
         }
 
-        public async Task<FornecedorViewModel> ObterFornecedorProdutosEndereco(Guid id)
+        private async Task<FornecedorViewModel> ObterFornecedorProdutosEndereco(Guid id)
         {
             var fornecedor = await _fornecedorRepository.ObterFornecedorProdutosEndereco(id);
 
             return _mapper.Map<FornecedorViewModel>(fornecedor);
         }
 
-        public async Task<FornecedorViewModel> ObterFornecedorEndereco(Guid id)
+        private async Task<FornecedorViewModel> ObterFornecedorEndereco(Guid id)
         {
             var fornecedor = await _fornecedorRepository.ObterFornecedorEndereco(id);
 
