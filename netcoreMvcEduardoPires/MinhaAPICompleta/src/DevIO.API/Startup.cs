@@ -32,6 +32,11 @@ namespace DevIO.API
 
             services.WebApiConfig();
 
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "My API", Version = "1.0" });
+            });
+
             services.ResolveDependecies();
         }
 
@@ -52,8 +57,12 @@ namespace DevIO.API
 
             //Sempre deve vir antes do config mvc
             app.UseAuthentication();
-
             app.UseMvcConfiguration();
+            app.UseSwagger();
+            app.UseSwaggerUI(x =>
+            {
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
         }
     }
 }
