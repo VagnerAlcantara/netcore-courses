@@ -1,6 +1,7 @@
 ﻿using AppMvcBasica.Models;
 using AutoMapper;
 using DevIO.Api.Extensions;
+using DevIO.API.Controllers;
 using DevIO.API.ViewModels;
 using DevIO.Business.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -9,10 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DevIO.API.Controllers
+namespace DevIO.API.V1.Controllers
 {
     [Authorize]
-    [Route("api/fornecedores")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/fornecedores")]
     public class FornecedorController : MainController
     {
         private readonly IFornecedorRepository _fornecedorRepository;

@@ -1,16 +1,20 @@
 ﻿using AppMvcBasica.Models;
 using AutoMapper;
+using DevIO.API.Controllers;
 using DevIO.API.ViewModels;
 using DevIO.Business.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace DevIO.API.Controllers
+namespace DevIO.API.V1.Controllers
 {
-    [Route("api/produtos")]
+    [Authorize]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/produtos")]
     public class ProdutoController : MainController
     {
         private readonly IProdutoRepository _produtoRepository;
