@@ -11,6 +11,18 @@ namespace DevIO.API.Configurations
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddApiVersioning(x =>
+            {
+                x.AssumeDefaultVersionWhenUnspecified = true;
+                x.DefaultApiVersion = new ApiVersion(1, 0);
+                x.ReportApiVersions = true;//será enviado no cabeçalho da requisição se api é atual ou obsoleta
+
+            });
+            services.AddVersionedApiExplorer(x =>
+            {
+                x.GroupNameFormat = "'v'VVV"; //VVV é referente a quantidade de parâmetros no nome da versão api
+                x.SubstituteApiVersionInUrl = true;
+            });
             services.Configure<ApiBehaviorOptions>(opt =>
             {
                 opt.SuppressModelStateInvalidFilter = true;
