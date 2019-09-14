@@ -3,6 +3,7 @@ using DevIO.API.ViewModels;
 using DevIO.Business.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -20,16 +21,20 @@ namespace DevIO.API.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
+        private readonly ILogger _logger;
+
         public AuthController(
             INotificador notificador,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             IOptions<AppSettings> appSettings,
-            IUser user) : base(notificador, user)
+            IUser user,
+            ILogger<AuthController> logger) : base(notificador, user)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _appSettings = appSettings.Value;
+            _logger = logger;
         }
 
         [HttpPost("nova-conta")]
@@ -66,8 +71,10 @@ namespace DevIO.API.Controllers
             var result = await _signInManager.PasswordSignInAsync(loginUser.Email, loginUser.Password, false, true);
 
             if (result.Succeeded)
+            {
+                _logger.LogInformation($"Usuário {loginUser.Email} logado com sucesso");
                 return CustomResponse(await GetJwt(loginUser.Email));
-
+            }
             if (result.IsLockedOut)
             {
                 NotificarErro("Usuário temporariamente bloqueado por tentativas inválidas");
