@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DevIO.Api.Configuration;
+using DevIO.Api.Extensions;
 using DevIO.API.Configurations;
 using DevIO.Data.Context;
 using Microsoft.AspNetCore.Builder;
@@ -36,6 +37,8 @@ namespace DevIO.API
 
             services.AddSwaggerConfig();
 
+            services.AddLoggingConfiguration();
+
             services.ResolveDependecies();
         }
 
@@ -56,8 +59,10 @@ namespace DevIO.API
 
             //Sempre deve vir antes do config mvc
             app.UseAuthentication();
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseMvcConfiguration();
             app.UseSwaggerConfig(provider);
+            app.UseLoggingConfiguration();
 
         }
     }
