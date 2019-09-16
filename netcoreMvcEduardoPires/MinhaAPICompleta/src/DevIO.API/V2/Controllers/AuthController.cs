@@ -65,7 +65,7 @@ namespace DevIO.API.V2.Controllers
         }
 
         [HttpPost("entrar")]
-        public async Task<ActionResult> Login(UserViewModel loginUser)
+        public async Task<ActionResult> Login(LoginUserViewModel loginUser)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
