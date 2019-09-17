@@ -17,8 +17,8 @@ namespace DevIO.API.Configurations
         {
             services.AddElmahIo(o =>
             {
-                o.ApiKey = "51bac90981ae4c509a64fac5dd85cebd";
-                o.LogId = new Guid("22cac726-fc0d-4a9b-b5c0-c2ef8a5affa1");
+                o.ApiKey = "*";
+                o.LogId = new Guid("*");
             });
 
             //Configuração para o Elmah utilizar o log padrão do asp net core 
